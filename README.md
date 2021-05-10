@@ -14,7 +14,7 @@ Create a new virtual environment, activate it and install the requirements:
 
 ```sh
 $ pip install virtualenv # if not already installed
-$ cd noyo
+$ cd noyo-coding-challenge
 $ virtualenv venv
 $ pip install -r requirements.txt
 ```
