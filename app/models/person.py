@@ -5,6 +5,7 @@ from app import db
 
 import sqlalchemy as sa
 
+
 make_versioned(user_cls=None)
 Base = declarative_base()
 
@@ -37,5 +38,4 @@ class Person(db.Model, Base):
 
 
 sa.orm.configure_mappers()              # configure models
-# db.create_all()                         # create initial tables and database
 PersonVersion = version_class(Person)   # create version class for Person
