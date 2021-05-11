@@ -13,7 +13,6 @@ def create_app(config_class=Config) -> Flask:
     # create application
     app = Flask(__name__)
     app.config.from_object(config_class)
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # bind database handler to Flask app
     db.init_app(app)

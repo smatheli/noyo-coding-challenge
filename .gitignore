@@ -6,6 +6,7 @@ venv/
 
 # Flask SQL Lite database
 app.db
+test.db
 
 # PyCharm
 .idea

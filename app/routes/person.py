@@ -21,7 +21,7 @@ def create_person():
         sess = scoped_session(sessionmaker(bind=engine))
         person = person_schema.load(data, session=sess)
         result = person_schema.dump(person.create())
-        return make_response(jsonify({"person": result}), 200)
+        return make_response(jsonify({"person": result}), 201)
     except sa.exc.IntegrityError as err:
         return f'{err.orig.args[0]}: {err.orig.args[1]}', 500
 
@@ -69,9 +69,14 @@ def get_all_persons():
 
 @api.route('/person/<id>', methods=['PUT'])
 def update_person_by_id(id):
+    validation_error = ValidationError({})
     try:
         data = request.get_json()
         get_person = Person.query.get(id)
+
+        if not get_person:
+            validation_error.messages["id"] = "Id is not valid."
+            raise validation_error
 
         if data.get('first_name'):
             get_person.first_name = data['first_name']
