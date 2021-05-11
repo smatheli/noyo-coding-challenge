@@ -7,16 +7,17 @@ This Flask application contains an API that performs CRUD actions on a person ob
 Pull down source code from this GitHub repository:
 
 ```sh
-$ git repo
+$ git clone https://github.com/smatheli/noyo-coding-challenge
 ```
 
-Create a new virtual environment, activate it and install the requirements:
+## Setup Virtual Environment
+
+Create a new virtual environment:
 
 ```sh
 $ pip install virtualenv # if not already installed
 $ cd noyo-coding-challenge
 $ virtualenv venv
-$ pip install -r requirements.txt
 ```
 
 Activate the virtual environment:
@@ -31,20 +32,32 @@ Install the python packages in requirements.txt:
 (venv) $ pip install -r requirements.txt
 ```
 
-## Setting Up Database
+## Set Up Database
 
-For the purpose of this coding challenge, Apache XAMPP was leveraged to create a database object.
+Initialize and then migrate a local SQLite database:
 
-XAMPP can be installed [here](https://www.apachefriends.org/download.html).
+```sh
+(venv) $ flask db init
+(venv) $ flask db migrate
+(venv) $ flask db upgrade
+```
 
-Once installed on your computer, start the XAMPP control panel and then start the Apache and MySQL servers. On your browser open http://localhost/dashboard/, select phpAdmin at the top right-hand corner, then create a database with the name **person**.
+You should then see a local **app.db** file.  You can view the database with [DB Browser for SQLite](https://sqlitebrowser.org/).
+
+## Test Application
+
+Tests can be run using pytest in the base directory of the project:
+
+```sh
+(venv) $ python -m pytest
+```
 
 ## Serve Flask Application
 
-Once the installation has been completed and the database has been set up, run the development server to serve the Flask application:
+After the virtual environment and database have been set up, run the development server to serve the Flask application:
 
 ```sh
-(venv) $ flask run
+(venv) $ gunicorn wsgi:handler
 ```
 
-Requests can now be served on http://localhost:5000!
+Requests can now be served on http://localhost:8080!
