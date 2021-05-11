@@ -34,10 +34,17 @@ Install the python packages in requirements.txt:
 
 ## Set Up Database
 
-Initialize and then migrate a local SQLite database:
+Migrate a local SQLite database:
 
 ```sh
-(venv) $ flask db init
+(venv) $ flask db migrate
+(venv) $ flask db upgrade
+```
+
+If **Error: Target database is not up to date** is seen, run the following: 
+
+```sh
+(venv) $ flask db stamp head
 (venv) $ flask db migrate
 (venv) $ flask db upgrade
 ```
